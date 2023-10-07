@@ -1,0 +1,23 @@
+<section>
+  <h1 class="text-center mb-4 bg-main-light w-50 mx-auto rounded shadow py-2">
+    All Categories
+  </h1>
+  <div
+    class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 justify-content-center"
+  >
+    <div class="col" role="button" *ngFor="let item of categories">
+      <div class="card" [routerLink]="['/categories', item._id]">
+        <img
+          height="300"
+          class="card-img-top"
+          [src]="item.image"
+          [alt]="item.name"
+          [title]="item.name"
+        />
+        <div class="card-body">
+          <h4 class="h6 text-main text-center">{{ item.name }}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

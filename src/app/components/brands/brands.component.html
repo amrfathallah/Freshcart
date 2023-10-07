@@ -1,0 +1,15 @@
+<section *ngIf="brands">
+  <h1 class="text-center mb-4 bg-main-light w-50 mx-auto rounded shadow py-2">
+    All Brands
+  </h1>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+    <div class="col" role="button" *ngFor="let brand of brands">
+      <div class="card" [routerLink]="['/brands', brand._id]">
+        <img class="card-img-top" [src]="brand.image" [alt]="brand.name" />
+        <div class="card-body">
+          <h4 class="card-title text-main">{{ brand.name }}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

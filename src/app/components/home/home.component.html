@@ -1,0 +1,127 @@
+<main *ngIf="productsData">
+  <section>
+    <div class="row g-0">
+      <div class="col-md-8">
+        <owl-carousel-o [options]="maincustomOptions">
+          <ng-template carouselSlide
+            ><img
+              height="400"
+              class="w-100"
+              src="./assets/images/main-slider-1.jpeg"
+              alt="main-slider-1"
+          /></ng-template>
+          <ng-template carouselSlide
+            ><img
+              height="400"
+              class="w-100"
+              src="./assets/images/main-slider-2.jpeg"
+              alt="main-slider-2"
+          /></ng-template>
+          <ng-template carouselSlide
+            ><img
+              height="400"
+              class="w-100"
+              src="./assets/images/main-slider-3.jpeg"
+              alt="main-slider-3"
+          /></ng-template>
+        </owl-carousel-o>
+      </div>
+      <div class="col-md-4">
+        <img
+          height="200"
+          class="w-100"
+          src="./assets/images/slide-1.jpeg"
+          alt="slide-1"
+        />
+        <img
+          height="200"
+          class="w-100"
+          src="./assets/images/slide-2.jpeg"
+          alt="slide-2"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="mb-4">
+      <h2>Shop Popular Categories</h2>
+      <owl-carousel-o [options]="customOptions">
+        <ng-container *ngFor="let item of categories">
+          <ng-template carouselSlide>
+            <img
+              height="250"
+              [src]="item.image"
+              [alt]="item.name"
+              [title]="item.name"
+            />
+            <h3 class="h6 text-main text-center">{{ item.name }}</h3>
+          </ng-template>
+        </ng-container>
+      </owl-carousel-o>
+    </div>
+  </section>
+
+  <section class="mx-2">
+    <div class="row g-4">
+      <div
+        *ngFor="let item of productsData"
+        class="col-sm-6 col-md-4 col-lg-3 col-xl-2"
+      >
+        <div
+          class="card h-100 borderCart overflow-hidden product position-relative"
+        >
+          <span
+            class="heart"
+            *ngIf="!isAddedToWishlist[item._id]"
+            role="button"
+            (click)="addToWishList(item._id)"
+          >
+            <i class="fas fa-heart"></i>
+          </span>
+          <span
+            *ngIf="isAddedToWishlist[item._id]"
+            class="heart"
+            role="button"
+            (click)="removeFromWishlist(item._id)"
+          >
+            <i class="fas fa-heart-broken"></i>
+          </span>
+          <div
+            class="d-flex flex-column h-100"
+            [routerLink]="['/details', item._id]"
+            role="button"
+          >
+            <img class="w-100" [src]="item.imageCover" alt="imageCover" />
+            <div
+              class="product-details pt-3 h-100 d-flex flex-column justify-content-between p-2"
+            >
+              <div class="mb-2">
+                <h4 class="text-main h6 fw-normal">{{ item.category.name }}</h4>
+                <h3 class="fs-5 fw-normal">
+                  {{ item.title.split(" ", 2).join(" ") }}
+                </h3>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center">
+                <span>{{ item.price }} EGP</span>
+                <span
+                  ><i class="fas fa-star rating-color"></i>
+                  {{ item.ratingsAverage }}
+                </span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <button
+              class="main-btn w-100 add-btn"
+              (click)="addProduct(item._id)"
+            >
+              +Add To Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

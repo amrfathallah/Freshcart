@@ -1,0 +1,61 @@
+<section
+  class="rounded allorders p-3 w-75 mx-auto bg-main-light shadow fw-light"
+>
+  <h1 class="text-center h4">All Orders</h1>
+  <div
+    class="row align-items-center border rounded m-2 p-2"
+    *ngFor="let order of userOrders; index as i"
+  >
+    <h3 class="h6">Order: {{ i + 1 }}</h3>
+    <div class="col-md-8">
+      <div
+        class="row align-items-center g-3 ps-5 mb-1"
+        *ngFor="let item of order.cartItems"
+      >
+        <div class="col-md-2">
+          <img
+            class="w-75 mx-auto d-block"
+            [src]="item.product.imageCover"
+            [alt]="item.product.title"
+          />
+        </div>
+        <div class="col-md-10">
+          <h3 class="h6 small text-main">
+            {{ item.product.title.split(" ", 3).join(" ") }}
+          </h3>
+          <span class="text-muted d-block"> Count: {{ item.count }} </span>
+          <span class="text-muted d-block"> Price: {{ item.price }} </span>
+          <span></span>
+        </div>
+        <hr class="border-warning mx-5" />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="border border-dark rounded p-1">
+        <p class="mb-0">
+          <span> Is Delivered: </span>
+          <span *ngIf="order.isDelivered == false" class="badge bg-danger"
+            >No</span
+          >
+          <span *ngIf="order.isDelivered == true" class="badge bg-success"
+            >Yes</span
+          >
+        </p>
+        <p class="mb-0">
+          <span> Is Paid: </span>
+          <span *ngIf="order.isPaid == false" class="badge bg-danger">No</span>
+          <span *ngIf="order.isPaid == true" class="badge bg-success">Yes</span>
+        </p>
+        <span class="d-block">
+          payment Method Type: {{ order.paymentMethodType }}
+        </span>
+        <span class="d-block">
+          totalOrderPrice: {{ order.totalOrderPrice }}
+        </span>
+      </div>
+    </div>
+    <div class="col-12">
+      <hr class="my-3 mx-5" />
+    </div>
+  </div>
+</section>

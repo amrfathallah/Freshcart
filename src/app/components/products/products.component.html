@@ -1,0 +1,59 @@
+<section class="mx-4">
+  <h1 class="text-center mb-4 bg-main-light w-50 mx-auto rounded shadow py-2">
+    All Products
+  </h1>
+  <div class="row row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-4">
+    <div *ngFor="let item of productsData">
+      <div
+        class="card h-100 borderCart overflow-hidden product position-relative"
+      >
+        <span
+          class="heart"
+          *ngIf="!isAddedToWishlist[item._id]"
+          role="button"
+          (click)="addToWishList(item._id)"
+        >
+          <i class="fas fa-heart"></i>
+        </span>
+        <span
+          *ngIf="isAddedToWishlist[item._id]"
+          class="heart"
+          role="button"
+          (click)="removeFromWishlist(item._id)"
+        >
+          <i class="fas fa-heart-broken"></i>
+        </span>
+        <div
+          class="d-flex flex-column h-100"
+          [routerLink]="['/details', item._id]"
+          role="button"
+        >
+          <img class="w-100" [src]="item.imageCover" alt="imageCover" />
+          <div
+            class="product-details pt-3 h-100 d-flex flex-column justify-content-between p-2"
+          >
+            <div class="mb-2">
+              <h4 class="text-main h6 fw-normal">{{ item.category.name }}</h4>
+              <h3 class="fs-5 fw-normal">
+                {{ item.title.split(" ", 2).join(" ") }}
+              </h3>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center">
+              <span>{{ item.price }} EGP</span>
+              <span
+                ><i class="fas fa-star rating-color"></i>
+                {{ item.ratingsAverage }}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <button class="main-btn w-100 add-btn" (click)="addProduct(item._id)">
+            +Add To Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
